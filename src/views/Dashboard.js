@@ -43,12 +43,12 @@ const Dashboard = () => {
   }
 
   return (
-    <div className={" mx-5 mt-11"}>
+    <div className={" mx-4 mt-11"}>
       <div className="flex">
         <h1 className="text-black font-bold text-3xl">Activity</h1>
         <ButtonPlus onClick={handleAdd} />
       </div>
-      <div className="mt-14 w-full grid grid-cols-4 gap-4">
+      <div className="mt-14 w-full grid grid-cols-4 gap-4 md:gap-2 md:grid md:grid-cols-4">
         {store.length > 0 ? (
           <>
             {store.map((item, index) => {
