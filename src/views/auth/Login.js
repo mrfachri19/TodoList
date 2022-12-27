@@ -14,15 +14,14 @@ export default function Login() {
         password: password,
       });
       setTimeout(() => {
-        // history.push("/home");
+        localStorage.setItem("token",CryptoJS.AES.encrypt(JSON.stringify(response.data.token), 'secret').toString())
+        history.push("/home");
       }, 2000);
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
-const secret = "initoken123"
-var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(secret), 'secret').toString();
 
   return (
     <>
