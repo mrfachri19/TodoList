@@ -4,6 +4,9 @@ const fullURL = (path) => {
   return `https://todo.api.devcode.gethired.id/${path}`;
 };
 
+const fullURLLogin = (path) => {
+  return `https://db.cdbethesda.space/${path}`;
+};
 export const handleNetworkError = (error) => {
   if (error.message === "Network request failed") {
     alert(
@@ -25,7 +28,16 @@ const post = (api) => async (data) => {
     },
   });
 };
-
+const postLogin = (api) => async (data) => {
+  return await axios.post(fullURLLogin(api), data, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-type": "application/json",
+    },
+  });
+};
 // const patch =
 //   (api) =>
 //   async (param = "", data) => {
@@ -69,15 +81,17 @@ const get =
     }
   };
 
-  const del = (api) => (param = '') => {
-  return axios.delete(`${fullURL(api)}${param}`, {
-    method: "DELETE",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-type": "application/json",
-    }
-  });
-};
+const del =
+  (api) =>
+  (param = "") => {
+    return axios.delete(`${fullURL(api)}${param}`, {
+      method: "DELETE",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-type": "application/json",
+      },
+    });
+  };
 
 export const getAllActivity = get("activity-groups");
 export const getActivitybyid = get("activity-groups");
@@ -85,13 +99,15 @@ export const delActivity = del("activity-groups");
 export const postActivity = post("activity-groups");
 export const postTodo = post("todo-items");
 export const deleteTodo = del("todo-items");
-
+export const postLoginAuth = postLogin("auth/login");
 
 const API = {
   getAllActivity,
   getActivitybyid,
   postActivity,
   delActivity,
+
+  postLoginAuth,
 
   postTodo,
   deleteTodo,
